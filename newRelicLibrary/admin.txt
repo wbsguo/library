@@ -1,0 +1,2 @@
+https://newrelic.com  wangbs2010@163.com  wang9247
+文档:https://docs.newrelic.com/docs/mobile-monitoring/mobile-monitoring-installation/android/installing-android-apps-gradle-android-studio
