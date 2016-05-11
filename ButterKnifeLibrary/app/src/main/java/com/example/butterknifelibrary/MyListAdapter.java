@@ -51,7 +51,7 @@ public class MyListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textItem.setText(datas.get(position));
-        return null;
+        return convertView;
     }
 
     static class ViewHolder {
