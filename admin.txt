@@ -4,3 +4,4 @@ DrafListDemo:拖动排序库
 APullToRefresh-SwipMenuList:滑动删除和下拉刷新，效果一般
 StickListLibrary:分组的title
 SipeMenuDemo:滑动删除
+XhsEmoticonsKeyboard:消息面板
