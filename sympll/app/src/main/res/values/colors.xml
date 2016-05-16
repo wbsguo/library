@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+  <color name="black">#000000</color>
+  <color name="white">#ffffff</color>
+  <color name="yellow_green">#8fc130</color>
+  <color name="android_green">#a5da3e</color>
+  <color name="carmine_pink">#e14949</color>
+  <color name="pastel_red">#f06161</color>
+  <color name="dark_jungle_green">#282828</color>
+  <color name="platinum2">#e7e6e7</color>
+  <color name="outer_space">#484848</color>
+  <color name="aureolin1">#fde800</color>
+</resources>
+
