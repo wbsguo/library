@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/luoke/androidStudio/my/github/library/PinterestlinbraryLikeAdapter/pinterestLikeAdapterViewDemo/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5360077a153ab5f2f0153992a226283971505a6e">
+        <dex dex="/Users/luoke/androidStudio/my/github/library/PinterestlinbraryLikeAdapter/pinterestLikeAdapterViewDemo/build/intermediates/pre-dexed/debug/instant-run-bootstrap_384b563548810cd09417289118bbdbac17e82633.jar" />
+    </item>
+    <item
+        jar="/Users/luoke/androidStudio/my/github/library/PinterestlinbraryLikeAdapter/pinterestLikeAdapterViewDemo/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ab57a1d2dc77b29c5f064993234137130730d47f">
+        <dex dex="/Users/luoke/androidStudio/my/github/library/PinterestlinbraryLikeAdapter/pinterestLikeAdapterViewDemo/build/intermediates/pre-dexed/debug/instant-run_da8a199b04ae2231831a4eb3da913d24b4bf0a35.jar" />
+    </item>
+    <item
+        jar="/Users/luoke/Desktop/android-sdks/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/luoke/androidStudio/my/github/library/PinterestlinbraryLikeAdapter/pinterestLikeAdapterViewDemo/build/intermediates/pre-dexed/debug/support-v4-19.1.0_f5f11396b2dd9b2c27128f520c70facce73a27fd.jar" />
+    </item>
+
+</items>
