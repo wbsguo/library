@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
     private int screen_width;
     private List<View> listViews = new ArrayList<View>();
     private int currIndex;// 记录当前的位置
-    private List<DataModel> dataModels=new ArrayList<DataModel>();
     private ImageFetcher mImageFetcher;
     private StaggeredAdapter mAdapter;
     private LinkedList<DuitangInfo> mInfos=new LinkedList<DuitangInfo>();
@@ -53,12 +52,6 @@ public class MainActivity extends Activity {
         AddItemToContainer(currentPage, 2);
     }
     public void getDatas(){
-        for(int i=0;i<3;i++){
-            DataModel dataModel=new DataModel();
-            dataModel.setId(i);
-            dataModel.setName("测试"+i);
-            dataModels.add(dataModel);
-        }
     }
     private void findUI(){
         searchAllmusicTitle =(TextView)findViewById(R.id.search_allmusic_title);
