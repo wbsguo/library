@@ -21,34 +21,6 @@ import java.util.List;
  */
 public class TreeViewAdapter2 extends BaseTreeViewAdapter {
     private LayoutInflater mInflater;
-
-    private String[] mGroups = {
-            "Group 01", "Group 02", "Group 03", "Group 04", "Group 05",
-            "Group 06", "Group 07", "Group 08", "Group 09", "Group 10",
-            "Group 11", "Group 12", "Group 13", "Group 14", "Group 15",
-            "Group 16", "Group 17", "Group 18", "Group 19", "Group 20"};
-
-    private String[][] mChildren = {
-            {"Way", "Arnold", "Barry", "Chuck", "David", "Afghanistan", "Albania", "Belgium", "Lily", "Jim", "LiMing", "Jodan"},
-            {"Ace", "Bandit", "Cha-Cha", "Deuce", "Bahamas", "China", "Dominica", "Jim", "LiMing", "Jodan"},
-            {"Fluffy", "Snuggles", "Ecuador", "Ecuador", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Way", "Arnold", "Barry", "Chuck", "David", "Afghanistan", "Albania", "Belgium", "Lily", "Jim", "LiMing", "Jodan"},
-            {"Ace", "Bandit", "Cha-Cha", "Deuce", "Bahamas", "China", "Dominica", "Jim", "LiMing", "Jodan"},
-            {"Fluffy", "Snuggles", "Ecuador", "Ecuador", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Way", "Arnold", "Barry", "Chuck", "David", "Afghanistan", "Albania", "Belgium", "Lily", "Jim", "LiMing", "Jodan"},
-            {"Ace", "Bandit", "Cha-Cha", "Deuce", "Bahamas", "China", "Dominica", "Jim", "LiMing", "Jodan"},
-            {"Fluffy", "Snuggles", "Ecuador", "Ecuador", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Way", "Arnold", "Barry", "Chuck", "David", "Afghanistan", "Albania", "Belgium", "Lily", "Jim", "LiMing", "Jodan"},
-            {"Ace", "Bandit", "Cha-Cha", "Deuce", "Bahamas", "China", "Dominica", "Jim", "LiMing", "Jodan"},
-            {"Fluffy", "Snuggles", "Ecuador", "Ecuador", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"},
-            {"Goldy", "Bubbles", "Iceland", "Iran", "Italy", "Jim", "LiMing", "Jodan"}};
     private List<String> titles;
     private HashMap<String,List<FriendBean>> hashMap;
     public TreeViewAdapter2(Context context, TreeView treeView,List<String> titles,HashMap<String,List<FriendBean>> hashMap) {
@@ -60,7 +32,6 @@ public class TreeViewAdapter2 extends BaseTreeViewAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-//        return mChildren[groupPosition][childPosition];
         return hashMap.get(titles.get(groupPosition)).get(childPosition);
     }
 
@@ -71,19 +42,16 @@ public class TreeViewAdapter2 extends BaseTreeViewAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-//        return mChildren[groupPosition].length;
         return hashMap.get(titles.get(groupPosition)).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-//        return mGroups[groupPosition];
         return titles.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-//        return mGroups.length;
         return titles.size();
     }
 
@@ -178,7 +146,7 @@ public class TreeViewAdapter2 extends BaseTreeViewAdapter {
 
     @Override
     public void updateHeader(View header, int groupPosition, int childPosition, int alpha) {
-        ((TextView) header.findViewById(R.id.group_name)).setText(mGroups[groupPosition]);
+        ((TextView) header.findViewById(R.id.group_name)).setText(titles.get(groupPosition));
         ((TextView) header.findViewById(R.id.online_count)).setText(getChildrenCount
                 (groupPosition) + "/" + getChildrenCount(groupPosition));
         header.setAlpha(alpha);
