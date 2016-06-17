@@ -355,7 +355,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
     /**
      * Acts upon click
      */
-    private PLA_AbsListView.PerformClick mPerformClick;
+    private PerformClick mPerformClick;
 
     /**
      * This view is in transcript mode -- it shows the bottom of the list when
@@ -597,7 +597,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
      *
      * When the scrolling cache is enabled, the caches are kept after the first
      * scrolling. You can manually clear the cache by calling
-     * {@link android.view.ViewGroup#setChildrenDrawingCacheEnabled(boolean)}.
+     * {@link ViewGroup#setChildrenDrawingCacheEnabled(boolean)}.
      *
      * @param enabled
      *            true to enable the scroll cache, false otherwise
@@ -858,7 +858,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
      * List padding is the maximum of the normal view's padding and the padding
      * of the selector.
      *
-     * @see android.view.View#getPaddingTop()
+     * @see View#getPaddingTop()
      * @see #getSelector()
      *
      * @return The top list padding.
@@ -871,7 +871,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
      * List padding is the maximum of the normal view's padding and the padding
      * of the selector.
      *
-     * @see android.view.View#getPaddingBottom()
+     * @see View#getPaddingBottom()
      * @see #getSelector()
      *
      * @return The bottom list padding.
@@ -884,7 +884,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
      * List padding is the maximum of the normal view's padding and the padding
      * of the selector.
      *
-     * @see android.view.View#getPaddingLeft()
+     * @see View#getPaddingLeft()
      * @see #getSelector()
      *
      * @return The left list padding.
@@ -897,7 +897,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
      * List padding is the maximum of the normal view's padding and the padding
      * of the selector.
      *
-     * @see android.view.View#getPaddingRight()
+     * @see View#getPaddingRight()
      * @see #getSelector()
      *
      * @return The right list padding.
@@ -1083,7 +1083,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
     }
 
     /**
-     * Returns the selector {@link android.graphics.drawable.Drawable} that is
+     * Returns the selector {@link Drawable} that is
      * used to draw the selection in the list.
      *
      * @return the drawable used to display the selector
@@ -1566,7 +1566,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
                         mPerformClick = new PerformClick();
                     }
 
-                    final PLA_AbsListView.PerformClick performClick = mPerformClick;
+                    final PerformClick performClick = mPerformClick;
                     performClick.mChild = child;
                     performClick.mClickMotionPosition = motionPosition;
                     performClick.rememberWindowAttachCount();
@@ -2625,12 +2625,12 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new PLA_AbsListView.LayoutParams(getContext(), attrs);
+        return new LayoutParams(getContext(), attrs);
     }
 
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
-        return p instanceof PLA_AbsListView.LayoutParams;
+        return p instanceof LayoutParams;
     }
 
     /**
@@ -2707,7 +2707,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
         // Reclaim views on screen
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
-            PLA_AbsListView.LayoutParams lp = (PLA_AbsListView.LayoutParams) child.getLayoutParams();
+            LayoutParams lp = (LayoutParams) child.getLayoutParams();
             // Don't reclaim header or footer views, or views that should be
             // ignored
             if (lp != null && mRecycler.shouldRecycleViewType(lp.viewType)) {
@@ -2805,7 +2805,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
     public static class LayoutParams extends ViewGroup.LayoutParams {
         /**
          * View type for this view, as returned by
-         * {@link android.widget.Adapter#getItemViewType(int) }
+         * {@link Adapter#getItemViewType(int) }
          */
         @ViewDebug.ExportedProperty(mapping = { @ViewDebug.IntToString(from = ITEM_VIEW_TYPE_IGNORE, to = "ITEM_VIEW_TYPE_IGNORE"),
                 @ViewDebug.IntToString(from = ITEM_VIEW_TYPE_HEADER_OR_FOOTER, to = "ITEM_VIEW_TYPE_HEADER_OR_FOOTER") })
@@ -2984,7 +2984,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
             final View[] activeViews = mActiveViews;
             for (int i = 0; i < childCount; i++) {
                 View child = getChildAt(i);
-                PLA_AbsListView.LayoutParams lp = (PLA_AbsListView.LayoutParams) child.getLayoutParams();
+                LayoutParams lp = (LayoutParams) child.getLayoutParams();
                 // Don't put header or footer views into the scrap heap
                 if (lp != null && lp.viewType != ITEM_VIEW_TYPE_HEADER_OR_FOOTER) {
                     // Note: We do place AdapterView.ITEM_VIEW_TYPE_IGNORE in
@@ -3047,7 +3047,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
          *            The view to add
          */
         void addScrapView(View scrap) {
-            PLA_AbsListView.LayoutParams lp = (PLA_AbsListView.LayoutParams) scrap.getLayoutParams();
+            LayoutParams lp = (LayoutParams) scrap.getLayoutParams();
             if (lp == null) {
                 return;
             }
@@ -3091,7 +3091,7 @@ public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> imple
             for (int i = count - 1; i >= 0; i--) {
                 final View victim = activeViews[i];
                 if (victim != null) {
-                    int whichScrap = ((PLA_AbsListView.LayoutParams) victim.getLayoutParams()).viewType;
+                    int whichScrap = ((LayoutParams) victim.getLayoutParams()).viewType;
 
                     activeViews[i] = null;
 

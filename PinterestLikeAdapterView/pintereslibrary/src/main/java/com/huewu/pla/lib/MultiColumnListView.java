@@ -131,7 +131,7 @@ public class MultiColumnListView extends PLA_ListView {
         if (isFixedView(child))
             child.measure(widthMeasureSpec, heightMeasureSpec);
         else
-            child.measure(View.MeasureSpec.EXACTLY | getColumnWidth(position), heightMeasureSpec);
+            child.measure(MeasureSpec.EXACTLY | getColumnWidth(position), heightMeasureSpec);
     }
 
     @Override
