@@ -8,4 +8,6 @@ XhsEmoticonsKeyboard:消息面板
 PinterestLikeAdapterView 瀑布流＋pullToRefresh:瀑布流：Pinterest或者StaggeredGridView
 PinterestlinbraryLikeAdapter 瀑布流没带上拉
 treeView:分组效果
-SwipePullListDemo  滑动删除上拉刷新
+SwipePullListDemo  滑动删除上拉刷新，这个可以
+PullToRefreshSwipeMenuListView-master  滑动删除上拉刷新,这个滑动太灵活了
+MvpTest:mvp模式
