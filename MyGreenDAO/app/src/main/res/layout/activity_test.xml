@@ -60,19 +60,20 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/delete_table"
+            android:id="@+id/note_kcal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onMyButtonClick"
-            android:text="" />
+            android:text="获取能量值" />
 
         <Button
+            android:id="@+id/add_filds"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onMyButtonClick"
-            android:text="" />
+            android:text="增加字段" />
     </LinearLayout>
 
     <ListView

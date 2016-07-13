@@ -1,6 +1,7 @@
 package itangqi.me.mygreendao.db.util;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
@@ -158,6 +159,59 @@ public class DBOperation {
                 } catch (Exception e) {
                     e.printStackTrace();
                     mHandler.sendEmptyMessage(FLAG_ERROR);
+                }
+            }
+        }.start();
+    }
+    public void getAllKcal(CallBackListener listener) {
+        final Handler mHandler = getHandler(listener);
+        new Thread() {
+            @Override
+            public void run() {
+                Cursor cursor = null;
+                double sum = 0;
+                try {
+                    String[] c = {"sum(" + NoteDao.kcal + ")"};
+                    cursor = db.query(NoteDao.TABLENAME, c, null, null, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        sum = cursor.getDouble(0);
+                    }
+                    Message msg = Message.obtain();
+                    msg.what = FLAG_COMPLETE;
+                    msg.obj = sum;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.sendEmptyMessage(FLAG_ERROR);
+                }finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+                }
+            }
+        }.start();
+    }
+    public void addFilds(CallBackListener listener) {
+        final Handler mHandler = getHandler(listener);
+        new Thread() {
+            @Override
+            public void run() {
+                Cursor cursor = null;
+                double sum = 0;
+                try {
+                    String sql = "ALTER TABLE "+ NoteDao.TABLENAME+"  ADD COLUMN "+NoteDao.descript+" TEXT";
+                    db.execSQL(sql);
+                    Message msg = Message.obtain();
+                    msg.what = FLAG_COMPLETE;
+                    msg.obj = sum;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.sendEmptyMessage(FLAG_ERROR);
+                }finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
                 }
             }
         }.start();

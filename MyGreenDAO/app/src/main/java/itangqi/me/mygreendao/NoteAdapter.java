@@ -54,6 +54,8 @@ public class NoteAdapter extends BaseAdapter {
 					.findViewById(R.id.note_id);
 			viewHolder.note_comment = (TextView) convertView
 					.findViewById(R.id.note_comment);
+			viewHolder.note_kcal = (TextView) convertView
+					.findViewById(R.id.note_kcal);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -64,11 +66,12 @@ public class NoteAdapter extends BaseAdapter {
 			viewHolder.note_id.setText(bean.getNoteId());
 			viewHolder.note_text.setText(bean.getName());
 			viewHolder.note_comment.setText(bean.getComment());
+			viewHolder.note_kcal.setText(String.valueOf(bean.getKcal()));
 		}
 		return convertView;
 	}
 
 	private class ViewHolder {
-		TextView id,note_id,note_text,note_comment;
+		TextView id,note_id,note_text,note_comment,note_kcal;
 	}
 }

@@ -11,16 +11,30 @@ public class Note {
     private String comment;
     private java.util.Date date;
     private String name;
+    private double kcal;
+    private String descript;
 
     public Note() {
     }
-    public Note(Long id, String noteId, String comment, Date date, String name) {
+    public Note(Long id, String noteId, String comment, Date date, String name, double kcal) {
         this.id = id;
         this.noteId = noteId;
         this.comment = comment;
         this.date = date;
         this.name = name;
+        this.kcal = kcal;
     }
+
+    public Note(Long id, String noteId, String comment, Date date, String name, double kcal, String descript) {
+        this.id = id;
+        this.noteId = noteId;
+        this.comment = comment;
+        this.date = date;
+        this.name = name;
+        this.kcal = kcal;
+        this.descript = descript;
+    }
+
     public Long getId() {
         return id;
     }
@@ -58,5 +72,21 @@ public class Note {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getKcal() {
+        return kcal;
+    }
+
+    public void setKcal(double kcal) {
+        this.kcal = kcal;
+    }
+
+    public String getDescript() {
+        return descript;
+    }
+
+    public void setDescript(String descript) {
+        this.descript = descript;
     }
 }

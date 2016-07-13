@@ -26,7 +26,7 @@ import itangqi.me.mygreendao.db.util.DBOperation;
 public class TestActivity extends Activity{
     public static final String TAG = "TestActivity";
     private EditText editText;
-    private Button buttonAdd,buttonQuery,deleteAll,count,delete_table;
+    private Button buttonAdd,buttonQuery,deleteAll,count,note_kcal,add_filds;
     private ListView list_test;
     private NoteAdapter adapter;
     private List<Note> datas=new ArrayList<>();
@@ -39,7 +39,8 @@ public class TestActivity extends Activity{
         buttonQuery = (Button) findViewById(R.id.buttonQuery);
         deleteAll = (Button) findViewById(R.id.deleteAll);
         count = (Button) findViewById(R.id.count);
-        delete_table = (Button) findViewById(R.id.delete_table);
+        note_kcal = (Button) findViewById(R.id.note_kcal);
+        add_filds = (Button) findViewById(R.id.add_filds);
         list_test = (ListView) findViewById(R.id.list_test);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +66,16 @@ public class TestActivity extends Activity{
                 count();
             }
         });
-        delete_table.setOnClickListener(new View.OnClickListener() {
+        note_kcal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteTable();
+                getAllKcal();
+            }
+        });
+        add_filds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFilds();
             }
         });
         list_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,6 +97,7 @@ public class TestActivity extends Activity{
         adapter=new NoteAdapter(datas,this);
         list_test.setAdapter(adapter);
     }
+    private int i=1;
     private void addNote() {
         String noteText = editText.getText().toString();
         editText.setText("");
@@ -100,7 +108,9 @@ public class TestActivity extends Activity{
             return;
         }
         String noteId=String.valueOf(System.currentTimeMillis());
-        Note note = new Note(null,noteId, comment, new Date(),noteText);
+        i=i+1;
+        double kcalValue=50*i;
+        Note note = new Note(null,noteId, comment, new Date(),noteText,kcalValue,"描述");
         saveFood(note);
     }
     private void searchNotes(){
@@ -215,6 +225,34 @@ public class TestActivity extends Activity{
     }
     private void deleteTable(){
 
+    }
+    private void getAllKcal(){
+        DataFactory.getInstance().getDbOperation(this)
+                .getAllKcal(new DBOperation.CallBackListener() {
+                    @Override
+                    public void onComplete(Object object) {
+                        double sum=(Double)object;
+                        note_kcal.setText("总能量:"+sum);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "失败");
+                    }
+                });
+    }
+    private void addFilds(){
+        DataFactory.getInstance().getDbOperation(this)
+                .addFilds(new DBOperation.CallBackListener() {
+                    @Override
+                    public void onComplete(Object object) {
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "失败");
+                    }
+                });
     }
     private void flashList(List<Note> notes){
         adapter.setDatas(notes);
