@@ -26,7 +26,7 @@ import itangqi.me.mygreendao.db.util.DBOperation;
 public class TestActivity extends Activity{
     public static final String TAG = "TestActivity";
     private EditText editText;
-    private Button buttonAdd,buttonQuery,deleteAll,count;
+    private Button buttonAdd,buttonQuery,deleteAll,count,delete_table;
     private ListView list_test;
     private NoteAdapter adapter;
     private List<Note> datas=new ArrayList<>();
@@ -39,6 +39,7 @@ public class TestActivity extends Activity{
         buttonQuery = (Button) findViewById(R.id.buttonQuery);
         deleteAll = (Button) findViewById(R.id.deleteAll);
         count = (Button) findViewById(R.id.count);
+        delete_table = (Button) findViewById(R.id.delete_table);
         list_test = (ListView) findViewById(R.id.list_test);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +63,12 @@ public class TestActivity extends Activity{
             @Override
             public void onClick(View v) {
                 count();
+            }
+        });
+        delete_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteTable();
             }
         });
         list_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -205,6 +212,9 @@ public class TestActivity extends Activity{
                         Log.e(TAG, "失败");
                     }
                 });
+    }
+    private void deleteTable(){
+
     }
     private void flashList(List<Note> notes){
         adapter.setDatas(notes);

@@ -75,13 +75,6 @@ public class DBOperation {
             public void run() {
                 try {
                     daoSession.getNoteDao().update(note);
-//                    List<Note> notes = daoSession.getNoteDao().queryBuilder().build().list();
-//                    if (notes.size() > 0) {
-//                        note.setId(notes.get(0).getId());
-//                    } else {
-//                        daoSession.getNoteDao().insert(note);
-//                    }
-//                    daoSession.getNoteDao().update(note);
                     Message msg = Message.obtain();
                     msg.what = FLAG_COMPLETE;
                     msg.obj = SUCCESS;
