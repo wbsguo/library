@@ -14,6 +14,7 @@ import itangqi.me.mygreendao.db.dao.DaoSession;
 import itangqi.me.mygreendao.db.dao.NoteDao;
 
 public class DBOperation {
+    private static final String TAG="DBOperation";
     private static final int FLAG_COMPLETE = -1;
     private static final int FLAG_ERROR = -2;
     private static final String SUCCESS = "success";
@@ -31,6 +32,24 @@ public class DBOperation {
     public DaoSession getDaoSession() {
         return daoSession;
     }
+    public void getCount(CallBackListener listener) {
+        final Handler mHandler = getHandler(listener);
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    long count = daoSession.getNoteDao().queryBuilder().count();
+                    Message msg = Message.obtain();
+                    msg.what = FLAG_COMPLETE;
+                    msg.obj = count;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.sendEmptyMessage(FLAG_ERROR);
+                }
+            }
+        }.start();
+    }
     public void saveFood(final Note note, CallBackListener listener) {
         final Handler mHandler = getHandler(listener);
         new Thread() {
@@ -38,6 +57,31 @@ public class DBOperation {
             public void run() {
                 try {
                     daoSession.getNoteDao().insert(note);
+                    Message msg = Message.obtain();
+                    msg.what = FLAG_COMPLETE;
+                    msg.obj = SUCCESS;
+                    mHandler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    mHandler.sendEmptyMessage(FLAG_ERROR);
+                }
+            }
+        }.start();
+    }
+    public void updataFood(final Note note, CallBackListener listener) {
+        final Handler mHandler = getHandler(listener);
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    daoSession.getNoteDao().update(note);
+//                    List<Note> notes = daoSession.getNoteDao().queryBuilder().build().list();
+//                    if (notes.size() > 0) {
+//                        note.setId(notes.get(0).getId());
+//                    } else {
+//                        daoSession.getNoteDao().insert(note);
+//                    }
+//                    daoSession.getNoteDao().update(note);
                     Message msg = Message.obtain();
                     msg.what = FLAG_COMPLETE;
                     msg.obj = SUCCESS;
@@ -74,7 +118,7 @@ public class DBOperation {
             public void run() {
                 try {
                     Query query = daoSession.getNoteDao().queryBuilder()
-                            .where(NoteDao.Properties.Text.eq(textString))
+                            .where(NoteDao.Properties.Name.eq(textString))
                             .orderAsc(NoteDao.Properties.Date)
                             .build();
                     List<Note> notes = query.list();

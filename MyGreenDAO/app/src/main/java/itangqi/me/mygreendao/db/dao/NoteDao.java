@@ -17,9 +17,10 @@ public class NoteDao extends AbstractDao<Note, Long> {
     private static final String TAG="NoteDao";
     public static final String TABLENAME = "NOTE";
     private static final String id = "_id";
-    private static final String text = "text";
+    private static final String note_id = "NOTE_ID";
     private static final String comment = "COMMENT";
     private static final String date = "DATE";
+    private static final String name = "NAME";
 
     /**
      * Properties of entity Note.<br/>
@@ -27,9 +28,10 @@ public class NoteDao extends AbstractDao<Note, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, id);
-        public final static Property Text = new Property(1, String.class, "text", false, text);
+        public final static Property Note_Id = new Property(1, String.class, "text", false, note_id);
         public final static Property Comment = new Property(2, String.class, "comment", false, comment);
         public final static Property Date = new Property(3, java.util.Date.class, "date", false, date);
+        public final static Property Name = new Property(4, String.class, "name", false, name);
     };
 
 
@@ -46,9 +48,10 @@ public class NoteDao extends AbstractDao<Note, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         String sql="CREATE TABLE " + constraint + TABLENAME+" (" +
                 id+" INTEGER PRIMARY KEY ," +
-                text+" TEXT NOT NULL ," +
+                note_id+" TEXT NOT NULL ," +
                 comment+" TEXT," +
-                date+" INTEGER" +
+                date+" INTEGER," +
+                name+" TEXT" +
                 ");";
         db.execSQL(sql); // 3: date
     }
@@ -67,17 +70,21 @@ public class NoteDao extends AbstractDao<Note, Long> {
         if (id != null) {
             stmt.bindLong(1, id);
         }
-        String text=entity.getText();
-        if(text != null){
-            stmt.bindString(2, text);
+        String noteIdValue=entity.getNoteId();
+        if(noteIdValue != null){
+            stmt.bindString(2, noteIdValue);
         }
-        String comment = entity.getComment();
-        if (comment != null) {
-            stmt.bindString(3, comment);
+        String commentValue = entity.getComment();
+        if (commentValue != null) {
+            stmt.bindString(3, commentValue);
         }
-        java.util.Date date = entity.getDate();
-        if (date != null) {
-            stmt.bindLong(4, date.getTime());
+        java.util.Date dateValue = entity.getDate();
+        if (dateValue != null) {
+            stmt.bindLong(4, dateValue.getTime());
+        }
+        String nameValue = entity.getName();
+        if (nameValue != null) {
+            stmt.bindString(5, nameValue);
         }
     }
 
@@ -94,8 +101,9 @@ public class NoteDao extends AbstractDao<Note, Long> {
                 cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0),
                 cursor.getString(offset + 1),
                 cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2),
-                cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3))
-        );
+                cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)),
+                cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4)
+                );
         return entity;
     }
 
@@ -103,9 +111,10 @@ public class NoteDao extends AbstractDao<Note, Long> {
     @Override
     public void readEntity(Cursor cursor, Note entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setText(cursor.getString(offset + 1));
+        entity.setNoteId(cursor.getString(offset + 1));
         entity.setComment(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setDate(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
     }
 
     /** @inheritdoc */

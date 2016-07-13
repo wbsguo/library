@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Enter a note you want to add or query"
-        android:inputType="text" />
+        android:inputType="text"
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -44,6 +45,26 @@
             android:layout_weight="1"
             android:onClick="onMyButtonClick"
             android:text="删除全部" />
+
+        <Button
+            android:id="@+id/count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onMyButtonClick"
+            android:text="数量" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onMyButtonClick"
+            android:text="" />
 
         <Button
             android:layout_width="0dp"

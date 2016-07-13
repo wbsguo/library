@@ -26,7 +26,7 @@ import itangqi.me.mygreendao.db.util.DBOperation;
 public class TestActivity extends Activity{
     public static final String TAG = "TestActivity";
     private EditText editText;
-    private Button buttonAdd,buttonQuery,deleteAll;
+    private Button buttonAdd,buttonQuery,deleteAll,count;
     private ListView list_test;
     private NoteAdapter adapter;
     private List<Note> datas=new ArrayList<>();
@@ -38,6 +38,7 @@ public class TestActivity extends Activity{
         buttonAdd = (Button) findViewById(R.id.buttonAdd);
         buttonQuery = (Button) findViewById(R.id.buttonQuery);
         deleteAll = (Button) findViewById(R.id.deleteAll);
+        count = (Button) findViewById(R.id.count);
         list_test = (ListView) findViewById(R.id.list_test);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +58,22 @@ public class TestActivity extends Activity{
                 deleteAll();
             }
         });
+        count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count();
+            }
+        });
         list_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Note note=(Note) parent.getItemAtPosition(position);
-                delete(note.getId());
+                if(position%2==0){
+                    delete(note.getId());
+                }else{
+                    note.setName("我们测试:"+position);
+                    updataFood(note);
+                }
             }
         });
         initView();
@@ -75,12 +87,13 @@ public class TestActivity extends Activity{
         String noteText = editText.getText().toString();
         editText.setText("");
         final DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
-        String comment = "Added on " + df.format(new Date());
+        String comment = df.format(new Date());
         if(TextUtils.isEmpty(noteText)){
             Toast.makeText(this, "Please enter a note to add", Toast.LENGTH_SHORT).show();
             return;
         }
-        Note note = new Note(null, noteText, comment, new Date());
+        String noteId=String.valueOf(System.currentTimeMillis());
+        Note note = new Note(null,noteId, comment, new Date(),noteText);
         saveFood(note);
     }
     private void searchNotes(){
@@ -110,6 +123,20 @@ public class TestActivity extends Activity{
     private void saveFood(final Note note) {
         DataFactory.getInstance().getDbOperation(this)
                 .saveFood(note, new DBOperation.CallBackListener() {
+                    @Override
+                    public void onComplete(Object object) {
+                        getNotes();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "失败");
+                    }
+                });
+    }
+    private void updataFood(final Note note) {
+        DataFactory.getInstance().getDbOperation(this)
+                .updataFood(note, new DBOperation.CallBackListener() {
                     @Override
                     public void onComplete(Object object) {
                         getNotes();
@@ -156,6 +183,21 @@ public class TestActivity extends Activity{
                     @Override
                     public void onComplete(Object object) {
                         getNotes();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "失败");
+                    }
+                });
+    }
+    private void count(){
+        DataFactory.getInstance().getDbOperation(this)
+                .getCount(new DBOperation.CallBackListener() {
+                    @Override
+                    public void onComplete(Object object) {
+                        long countValue=(Long)object;
+                        count.setText("数量:"+countValue);
                     }
 
                     @Override

@@ -50,6 +50,8 @@ public class NoteAdapter extends BaseAdapter {
 					.findViewById(R.id.id);
 			viewHolder.note_text = (TextView) convertView
 					.findViewById(R.id.note_text);
+			viewHolder.note_id = (TextView) convertView
+					.findViewById(R.id.note_id);
 			viewHolder.note_comment = (TextView) convertView
 					.findViewById(R.id.note_comment);
 			convertView.setTag(viewHolder);
@@ -59,13 +61,14 @@ public class NoteAdapter extends BaseAdapter {
 		final Note bean = datas.get(position);
 		if(bean!=null){
 			viewHolder.id.setText(String.valueOf(bean.getId()));
-			viewHolder.note_text.setText(bean.getText());
+			viewHolder.note_id.setText(bean.getNoteId());
+			viewHolder.note_text.setText(bean.getName());
 			viewHolder.note_comment.setText(bean.getComment());
 		}
 		return convertView;
 	}
 
 	private class ViewHolder {
-		TextView id,note_text,note_comment;
+		TextView id,note_id,note_text,note_comment;
 	}
 }

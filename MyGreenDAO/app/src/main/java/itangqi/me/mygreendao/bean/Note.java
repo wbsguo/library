@@ -1,29 +1,26 @@
 package itangqi.me.mygreendao.bean;
 
+import java.util.Date;
+
 /**
  * Entity mapped to table NOTE.
  */
 public class Note {
     private Long id;//主键
-    /** Not-null value. */
-    private String text;
+    private String noteId;//id值
     private String comment;
     private java.util.Date date;
+    private String name;
 
     public Note() {
     }
-
-    public Note(Long id) {
+    public Note(Long id, String noteId, String comment, Date date, String name) {
         this.id = id;
-    }
-
-    public Note(Long id, String text, String comment, java.util.Date date) {
-        this.id = id;
-        this.text = text;
+        this.noteId = noteId;
         this.comment = comment;
         this.date = date;
+        this.name = name;
     }
-
     public Long getId() {
         return id;
     }
@@ -32,16 +29,13 @@ public class Note {
         this.id = id;
     }
 
-    /** Not-null value. */
-    public String getText() {
-        return text;
+    public String getNoteId() {
+        return noteId;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setText(String text) {
-        this.text = text;
+    public void setNoteId(String noteId) {
+        this.noteId = noteId;
     }
-
     public String getComment() {
         return comment;
     }
@@ -58,4 +52,11 @@ public class Note {
         this.date = date;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
