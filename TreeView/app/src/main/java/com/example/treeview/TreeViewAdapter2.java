@@ -1,6 +1,7 @@
 package com.example.treeview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,8 @@ import android.widget.TextView;
 import com.example.treeview.tree.BaseTreeViewAdapter;
 import com.example.treeview.tree.TreeView;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TreeView demo adapter
@@ -22,12 +23,20 @@ import java.util.List;
 public class TreeViewAdapter2 extends BaseTreeViewAdapter {
     private LayoutInflater mInflater;
     private List<String> titles;
-    private HashMap<String,List<FriendBean>> hashMap;
-    public TreeViewAdapter2(Context context, TreeView treeView,List<String> titles,HashMap<String,List<FriendBean>> hashMap) {
+    private Map<String,List<FoodBean>> hashMap;
+    public TreeViewAdapter2(Context context, TreeView treeView,List<String> titles,Map<String,List<FoodBean>> hashMap) {
         super(treeView);
         mInflater = LayoutInflater.from(context);
         this.titles=titles;
         this.hashMap=hashMap;
+    }
+
+    public void setTitles(List<String> titles) {
+        this.titles = titles;
+    }
+
+    public void setHashMap(Map<String, List<FoodBean>> hashMap) {
+        this.hashMap = hashMap;
     }
 
     @Override
@@ -42,6 +51,7 @@ public class TreeViewAdapter2 extends BaseTreeViewAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
+        Log.e("sss","groupPosition:"+groupPosition);
         return hashMap.get(titles.get(groupPosition)).size();
     }
 
@@ -78,8 +88,8 @@ public class TreeViewAdapter2 extends BaseTreeViewAdapter {
         }
 
         ChildHolder holder = getChildHolder(convertView);
-        FriendBean friendBean=(FriendBean) getChild(groupPosition, childPosition);
-        holder.name.setText(friendBean.getFriendName());
+        FoodBean friendBean=(FoodBean) getChild(groupPosition, childPosition);
+        holder.name.setText(friendBean.getFoodName());
         holder.state.setText(friendBean.getFriendDescript());
         return convertView;
     }
